@@ -33,11 +33,12 @@
   retries: 5
   delay: 15
 
-- name: Remove AWS config, now that objects have been downloaded.
-  file: path={{ item }} state=absent
-  when: s3_containers is defined or s3_workflows is defined
-  with_fileglob:
-    - /home/ubuntu/.aws/*
+#TODO: Require docstore to upload outputs back to aws.
+#- name: Remove AWS config, now that objects have been downloaded.
+#  file: path={{ item }} state=absent
+#  when: s3_containers is defined or s3_workflows is defined
+#  with_fileglob:
+#    - /home/ubuntu/.aws/*
 
 # TODO: Some of these plays are copy-pasted (ugh!) with different hashes. Need to find a more elegant way to do this.
 
