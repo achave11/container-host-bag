@@ -17,7 +17,7 @@
   become: yes
   become_user: root
   shell: python /home/ubuntu/downloads/get-pip.py
-
+#TODO: provisioning fails in the following!
 - name: Install docker-py
   become: yes
   become_user: root
