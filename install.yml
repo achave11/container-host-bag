@@ -2,6 +2,13 @@
 # file: install.yml
 # This file is used for installing a container host
 
+# Attempt at updating python
+- hosts: all
+  gather_facts: False
+
+  tasks:
+  - name: 'install python for all'
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 # Not sure why, but I needed this to create a /etc/hosts that actually works with the Ubuntu image here on openstack
 - hosts: master:worker
   become: yes
@@ -9,10 +16,6 @@
   # needed for ubuntu 16.04 LS and above
   gather_facts: no
   pre_tasks:
-    - name: 'update system'
-      raw: sudo apt-get -y update
-    - name: 'update python'
-      raw: sudo apt-get -y install python2.7
     - name: 'install python2'
       raw: sudo apt-get -y install python-simplejson
   # Idempotent way to build a /etc/hosts file with Ansible using your Ansible hosts inventory for a source.
