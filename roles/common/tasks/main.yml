@@ -1,5 +1,5 @@
 ---
---name: Quick update
+- name: Quick update
   become: yes
   become_user: root
   raw: apt-get update
