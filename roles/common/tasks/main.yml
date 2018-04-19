@@ -1,4 +1,6 @@
 ---
+- name: Update ubuntu
+  raw: sudo apt-get update
 
 - name: Copy over bash profile
   copy: src=roles/common/files/bashrc dest=/home/ubuntu/.bashrc owner=ubuntu
@@ -16,8 +18,9 @@
 - name: Install pip
   become: yes
   become_user: root
-  shell: python /home/ubuntu/downloads/get-pip.py
-#TODO: provisioning fails in the following!
+  raw: sudo apt-get install -y python-pip
+  #python /home/ubuntu/downloads/get-pip.py
+#TODO: provisioning fails in the following! Might require root privileges.
 - name: Install docker-py
   become: yes
   become_user: root

@@ -1,14 +1,6 @@
 ---
 # file: install.yml
 # This file is used for installing a container host
-
-# Attempt at updating python
-- hosts: all
-  gather_facts: False
-
-  tasks:
-  - name: 'install python for all'
-    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
 # Not sure why, but I needed this to create a /etc/hosts that actually works with the Ubuntu image here on openstack
 - hosts: master:worker
   become: yes
