@@ -1,8 +1,6 @@
 ---
 - name: Quick update
-  become: yes
-  become_user: root
-  raw: apt-get update
+  raw: sudo apt-get update
 
 - name: Copy over bash profile
   copy: src=roles/common/files/bashrc dest=/home/ubuntu/.bashrc owner=ubuntu
