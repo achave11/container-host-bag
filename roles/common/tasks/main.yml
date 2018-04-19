@@ -1,4 +1,8 @@
 ---
+--name: Quick update
+  become: yes
+  become_user: root
+  raw: apt-get update
 
 - name: Copy over bash profile
   copy: src=roles/common/files/bashrc dest=/home/ubuntu/.bashrc owner=ubuntu
@@ -9,6 +13,8 @@
   apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items:
     - python
+- name: Create downloads directory
+  raw: mkdir /home/ubuntu/downloads
 
 - name: Download get-pip
   get_url: url=https://bootstrap.pypa.io/get-pip.py dest=/home/ubuntu/downloads/get-pip.py
