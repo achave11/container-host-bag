@@ -39,8 +39,8 @@
 - name: Copy over keys/credentials for workers.
   copy: src={{ item }} dest={{ item }} owner=ubuntu
   with_fileglob:
-    - /home/ubuntu/.gnos/*
-    - /home/ubuntu/.aws/*
+#    - /home/ubuntu/.gnos/* // Ansible can find this paths
+    - /root/.aws/*
 
 - name: Install avro
   pip: name=avro executable=pip2 version=1.8.1
