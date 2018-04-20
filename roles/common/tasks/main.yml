@@ -12,6 +12,8 @@
 
 #- name: Download get-pip
 #  get_url: url=https://bootstrap.pypa.io/get-pip.py dest=/home/ubuntu/downloads/get-pip.py
+- name: Install build pre-requisites
+  raw: sudo apt-get install build-essential libssl-dev libffi-dev python-dev
 
 - name: Install pip
   become: yes
