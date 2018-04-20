@@ -108,7 +108,7 @@
 #   become_user: root
 #   include: ../monitoring-bag/site.yml  sensu_server_host=sensu-server
 
-- hosts: master
+- hosts: master:worker
   become: yes
   become_user: root
   roles:
