@@ -1,6 +1,4 @@
 ---
-- name: Quick update
-  raw: sudo apt-get update
 
 - name: Copy over bash profile
   copy: src=roles/common/files/bashrc dest=/home/ubuntu/.bashrc owner=ubuntu
@@ -12,13 +10,14 @@
   with_items:
     - python
 
-- name: Download get-pip
-  get_url: url=https://bootstrap.pypa.io/get-pip.py dest=/home/ubuntu/downloads/get-pip.py
+#- name: Download get-pip
+#  get_url: url=https://bootstrap.pypa.io/get-pip.py dest=/home/ubuntu/downloads/get-pip.py
 
 - name: Install pip
   become: yes
   become_user: root
-  shell: python /home/ubuntu/downloads/get-pip.py
+  raw: sudo apt-get install -y python-pip
+#shell: python /home/ubuntu/downloads/get-pip.py
 #TODO: provisioning fails in the following!
 - name: Install docker-py
   become: yes
