@@ -1,6 +1,6 @@
 ---
 - name: Get Architecture3 jar file # This needs to be updated to the latest release of consonance dependencies!
-  get_url: url=https://www.dropbox.com/s/p254pqswn3o53xg/consonance-arch-2.0.0-alpha.16-SNAPSHOT.jar?dl=0 dest=/home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
+  raw: sudo wget https://www.dropbox.com/s/p254pqswn3o53xg/consonance-arch-2.0.0-alpha.16-SNAPSHOT.jar?dl=0 -O /home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
   #https://www.dropbox.com/s/giy9ayxlvpoohiz/consonance-arch-2.0-alpha.11-SNAPSHOT.jar?dl=1 dest=/home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
   #get_url: url=https://seqwaremaven.oicr.on.ca/artifactory/simple/seqware-release/io/consonance/consonance-arch/{{ consonance_arch_version }}/consonance-arch-{{ consonance_arch_version }}.jar dest=/home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
 
