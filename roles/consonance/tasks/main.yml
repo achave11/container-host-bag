@@ -1,6 +1,7 @@
 ---
 - name: Get Architecture3 jar file # This needs to be updated to the latest release of consonance dependencies!
   get_url: url=https://www.dropbox.com/s/giy9ayxlvpoohiz/consonance-arch-2.0-alpha.11-SNAPSHOT.jar?dl=1 dest=/home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
+  #TODO: Need to synchronize this arch-file!
   #get_url: url=https://seqwaremaven.oicr.on.ca/artifactory/simple/seqware-release/io/consonance/consonance-arch/{{ consonance_arch_version }}/consonance-arch-{{ consonance_arch_version }}.jar dest=/home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
 
 # The "endless" flag for the worker is not a true/false, it's "--endless" or "".
@@ -96,30 +97,3 @@
 - name: Run worker as daemon
   become_user: root
   shell: chdir=/home/ubuntu nohup bash /home/ubuntu/run_worker_daemon.sh &
-#
-#TASK [consonance : Copy over keys/credentials for workers.] ********************
-#failed: [i-096caf7adf73b18cb] (item=/root/.aws/config) => {"checksum": "551d00d19e9a805c5476299bce5712b4c395766a", "failed": true, "item": "/root/.aws/config", "msg": "Destination directory /root/.aws does not exist"}
-#	to retry, use: --limit @/container-host-bag/install.retry
-#
-#PLAY RECAP *********************************************************************
-#i-096caf7adf73b18cb        : ok=39   changed=25   unreachable=0    failed=1
-#
-#04:30:51.316 [pool-1-thread-2] INFO  i.c.youxia.deployer.Deployer - Caught an Ansible non-zero exit code for: ansible-playbook -i /tmp/ansible2150257973263758792.inventory /container-host-bag/install.yml -e @/container-host-bag/example_params.json
-#04:30:51.317 [pool-1-thread-2] ERROR i.c.a.c.ContainerProvisionerThreads$ProvisionVMs - Youxia deployer threw the following exception
-#java.lang.RuntimeException: org.apache.commons.exec.ExecuteException: Process exited with an error: 2 (Exit value: 2)
-#	at io.cloudbindle.youxia.deployer.Deployer.runAnsibleActual(Deployer.java:710)
-#	at io.cloudbindle.youxia.deployer.Deployer.prepAnsibleForAWS(Deployer.java:584)
-#	at io.cloudbindle.youxia.deployer.Deployer.runDeploymentForAWS(Deployer.java:749)
-#	at io.cloudbindle.youxia.deployer.Deployer.runDeployment(Deployer.java:732)
-#	at io.cloudbindle.youxia.deployer.Deployer.main(Deployer.java:1008)
-#	at io.consonance.arch.containerProvisioner.ContainerProvisionerThreads$ProvisionVMs.call(ContainerProvisionerThreads.java:311)
-#	at io.consonance.arch.containerProvisioner.ContainerProvisionerThreads$ProvisionVMs.call(ContainerProvisionerThreads.java:196)
-#	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-#	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-#	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-#	at java.lang.Thread.run(Thread.java:748)
-#Caused by: org.apache.commons.exec.ExecuteException: Process exited with an error: 2 (Exit value: 2)
-#	at org.apache.commons.exec.DefaultExecutor.executeInternal(DefaultExecutor.java:404)
-#	at org.apache.commons.exec.DefaultExecutor.execute(DefaultExecutor.java:166)
-#	at io.cloudbindle.youxia.deployer.Deployer.runAnsibleActual(Deployer.java:696)
-#	... 10 common frames omitted
