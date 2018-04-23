@@ -35,3 +35,8 @@
   become: yes
   become_user: root
   file: state=directory path=/home/ubuntu/.aws owner=ubuntu
+
+- name: Setup dockstore config directory
+  become: yes
+  become_user: root
+  file: state=directory path=/home/ubuntu/.dockstore owner=ubuntu
