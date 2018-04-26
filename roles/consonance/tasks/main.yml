@@ -38,13 +38,24 @@
   when: seqware_use_custom_settings is defined and seqware_use_custom_settings
 
 - name: Copy over keys/credentials for workers.
-  copy: src={{ item }} dest=/home/ubuntu/.aws owner=root
+  copy: src={{ item }} dest=/home/ubuntu/.aws owner=ubuntu
+  with_fileglob:
+#    - /home/ubuntu/.gnos/* // Ansible can find this paths
+    - /root/.aws/*
+
+- name: Copy over keys/credentials for workers.
+  copy: src={{ item }} dest=/root/.aws owner=root
   with_fileglob:
 #    - /home/ubuntu/.gnos/* // Ansible can find this paths
     - /root/.aws/*
 
 - name: Copy over dockstore credentials
-  copy: src={{ item }} dest=/home/ubuntu/.dockstore owner=root
+  copy: src={{ item }} dest=/home/ubuntu/.dockstore owner=ubuntu
+  with_fileglob:
+    - /root/.dockstore/*
+
+- name: Copy over dockstore credentials 2
+  copy: src={{ item }} dest=/root/.dockstore/ owner=root
   with_fileglob:
     - /root/.dockstore/*
 
