@@ -9,6 +9,8 @@
   apt: pkg={{ item }} state=present update_cache=yes cache_valid_time=3600
   with_items:
     - python
+- name: Update ubuntu system
+  raw: apt-get update
 
 #- name: Download get-pip
 #  get_url: url=https://bootstrap.pypa.io/get-pip.py dest=/home/ubuntu/downloads/get-pip.py
@@ -18,7 +20,7 @@
 - name: Install pip
   become: yes
   become_user: root
-  raw: sudo apt-get install -y python-pip
+  raw: apt-get install -y python-pip
 #shell: python /home/ubuntu/downloads/get-pip.py
 #TODO: provisioning fails in the following!
 - name: Install docker-py
