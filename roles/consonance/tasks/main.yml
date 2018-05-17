@@ -66,7 +66,7 @@
   pip: name=schema-salad executable=pip2 version=1.14.20160708181155
 
 - name: Install cwltool
-  pip: name=cwltool executable=pip2 version=1.0.20160712154127
+  pip: name=cwltool executable=pip2 version=1.0.20170828135420
 
 - name: Copy over patched job files
   copy: src=roles/consonance/files/job_new.py dest=/usr/local/lib/python2.7/dist-packages/cwltool/job.py owner=root
