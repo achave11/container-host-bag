@@ -58,24 +58,17 @@
   with_fileglob:
     - /root/.dockstore/*
 
-- name: Install ChacheControl
-  pip: name=CacheControl executable=pip2 version=0.11.7
-
-- name: Install CWL-Runner
-  pip: name=cwl-runner executable=pip2 version=1.0
-
-
 - name: Install setuptools
-  pip: name=setuptools executable=pip2 version=36.5.0
+  raw: sudo pip install setuptools==36.5.0
 
 - name: Install avro
-  pip: name=avro executable=pip2 version=1.8.1
+  raw: sudo pip install avro==1.8.1
 
 - name: Install schema-salad
-  pip: name=schema-salad executable=pip2 version=2.6.20170806163416
+  raw: sudo pip install schema-salad==2.6.20170806163416
 
 - name: Install cwltool
-  pip: name=cwltool executable=pip2 version=1.0.20160712154127
+  raw: sudo pip install cwltool==1.0.20160712154127
 
 - name: Copy over patched job files
   copy: src=roles/consonance/files/job_new.py dest=/usr/local/lib/python2.7/dist-packages/cwltool/job.py owner=root
