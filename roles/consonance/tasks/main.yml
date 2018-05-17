@@ -63,7 +63,8 @@
   pip: name=avro executable=pip2 version=1.8.1
 
 - name: Install schema-salad
-  pip: name=schema-salad executable=pip2 version=1.14.20160708181155
+  pip: name=schema-salad executable=pip2 version=2.6.20170806163416
+  pip: name=schema-salad executable=pip2 version=2.6.20170806163416
 
 - name: Install cwltool
   pip: name=cwltool executable=pip2 version=1.0.20170828135420
