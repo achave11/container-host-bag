@@ -1,6 +1,6 @@
 ---
 - name: Get Architecture3 jar file # This needs to be updated to the latest release of consonance dependencies!
-  raw: sudo wget https://www.dropbox.com/s/p254pqswn3o53xg/consonance-arch-2.0.0-alpha.16-SNAPSHOT.jar?dl=0 -O /home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
+  raw: sudo wget https://www.dropbox.com/s/p254pqswn3o53xg/consonance-arch-2.0.0-alpha.16-SNAPSHOT.jar -O /home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
   #https://www.dropbox.com/s/giy9ayxlvpoohiz/consonance-arch-2.0-alpha.11-SNAPSHOT.jar?dl=1 dest=/home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
   #get_url: url=https://seqwaremaven.oicr.on.ca/artifactory/simple/seqware-release/io/consonance/consonance-arch/{{ consonance_arch_version }}/consonance-arch-{{ consonance_arch_version }}.jar dest=/home/ubuntu/consonance-arch-{{ consonance_arch_version }}.jar
 
@@ -37,21 +37,10 @@
   replace: dest=/home/ubuntu/workerConfig.ini regexp='^(\#seqware-)(.*)$' replace='seqware-\2' backup=yes owner=ubuntu
   when: seqware_use_custom_settings is defined and seqware_use_custom_settings
 
-#- name: Copy over keys/credentials for workers.
-#  copy: src={{ item }} dest=/home/ubuntu/.aws owner=ubuntu
-#  with_fileglob:
-##    - /home/ubuntu/.gnos/* // Ansible can find this paths
-#    - /root/.aws/*
-
 - name: Copy over keys/credentials for workers.
   copy: src={{ item }} dest=/root/.aws owner=root
   with_fileglob:
     - /root/.aws/*
-
-#- name: Copy over dockstore credentials
-#  copy: src={{ item }} dest=/home/ubuntu/.dockstore owner=ubuntu
-#  with_fileglob:
-#    - /root/.dockstore/*
 
 - name: Copy over dockstore credentials
   copy: src={{ item }} dest=/root/.dockstore/ owner=root
@@ -68,50 +57,9 @@
   raw: sudo pip install schema-salad==2.6.20170806163416
 
 - name: Install cwltool
-  raw: sudo pip install cwltool==1.0.20160712154127
-
-- name: Copy over patched job files
-  copy: src=roles/consonance/files/job_new.py dest=/usr/local/lib/python2.7/dist-packages/cwltool/job.py owner=root
-
-- name: Copy over patched process files
-  copy: src=roles/consonance/files/process_new.py dest=/usr/local/lib/python2.7/dist-packages/cwltool/process.py owner=root
-
-- name: Copy over patched main files
-  copy: src=roles/consonance/files/main_new.py dest=/usr/local/lib/python2.7/dist-packages/cwltool/main.py owner=root
-
-- name: Delete compiled job files
-  command: rm -f /usr/local/lib/python2.7/dist-packages/cwltool/job.pyc
-
-- name: Delete compiled process files
-  command: rm -f /usr/local/lib/python2.7/dist-packages/cwltool/process.pyc
-
-- name: Delete compiled main files
-  command: rm -f /usr/local/lib/python2.7/dist-packages/cwltool/main.pyc
-
-# install dcc-storage
-
-#- name: Create required directory
-#  become_user: root
-#  file: path=/icgc/dcc-storage/ owner=ubuntu state=directory
-#
-#- name: Create working directory
-#  become_user: root
-#  file: path=/icgc/dcc-storage/archive owner=ubuntu state=directory
-#
-#- name: Get file
-#  get_url: url=https://seqwaremaven.oicr.on.ca/artifactory/dcc-release/org/icgc/dcc/dcc-storage-client/{{ dcc_storage_version }}/dcc-storage-client-{{ dcc_storage_version }}-dist.tar.gz dest=/icgc/dcc-storage/archive
-#
-#- name: Unarchive the dcc tool
-#  unarchive: src=/icgc/dcc-storage/archive/dcc-storage-client-{{ dcc_storage_version }}-dist.tar.gz dest=/icgc/dcc-storage/archive  copy=no
-#
-#- name: Copy files extracted files into correct location
-#  shell: creates=/icgc/dcc-storage/bin/dcc-storage-client mv /icgc/dcc-storage/archive/dcc-storage-client-{{ dcc_storage_version }}/* /icgc/dcc-storage/
-#
-#- name: Template shell script
-#  template: src=dcc-storage-client.j2 dest=/icgc/dcc-storage/bin/dcc-storage-client owner=ubuntu
+  raw: sudo pip install cwltool==1.0.20170217172322
 
 # end dcc-storage
-
 - name: Run worker as daemon
   become_user: root
   shell: chdir=/home/ubuntu nohup bash /home/ubuntu/run_worker_daemon.sh &
